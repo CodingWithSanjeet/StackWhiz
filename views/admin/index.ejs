@@ -1,0 +1,33 @@
+<div class="login-container fade-in">
+  <div class="login-content">
+    <div class="login-header">
+      <div class="login-icon">🔐</div>
+      <h1>Admin Login</h1>
+      <p>Sign in to access the admin dashboard</p>
+    </div>
+
+    <form action="/admin" method="post" class="login-form">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" placeholder="Enter your username" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="Enter your password" required>
+      </div>
+
+      <button type="submit" class="btn btn-login">
+        <span>Sign In</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+        </svg>
+      </button>
+    </form>
+
+    <div class="login-footer">
+      <a href="/" class="back-link">← Back to Blog</a>
+    </div>
+  </div>
+</div>
+

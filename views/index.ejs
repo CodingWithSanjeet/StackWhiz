@@ -1,0 +1,150 @@
+<!-- Enhanced Hero Section -->
+<section class="hero-section">
+    <div class="hero-content">
+        <div class="hero-text">
+            <div class="hero-greeting">
+                <span class="greeting-emoji">👋</span>
+                <span class="greeting-text">Hello, I'm</span>
+            </div>
+            <h1 class="hero-name">
+                <span class="name-highlight">Sanjeet</span>
+            </h1>
+            <div class="hero-roles">
+                <span class="role-item active">Full Stack Developer</span>
+                <span class="role-item">Content Creator</span>
+                <span class="role-item">Tech Enthusiast</span>
+            </div>
+            <p class="hero-description">
+                6+ years of experience building scalable web applications at 
+                <span class="company-highlight">Adobe</span> and 
+                <span class="company-highlight">Oracle</span>. 
+                Passionate about sharing knowledge and creating amazing digital experiences.
+            </p>
+            <div class="hero-actions">
+                <a href="/about" class="hero-btn primary">
+                    <span>About Me</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                    </svg>
+                </a>
+                <a href="/contact" class="hero-btn secondary">
+                    <span>Get In Touch</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-image-container">
+                <img src="/images/hero-image1.png" alt="Sanjeet - Full Stack Developer" class="hero-image" width="981" height="528">
+                <div class="hero-decorations">
+                    <div class="decoration-item decoration-1">
+                        <span class="tech-icon">⚛️</span>
+                        <span class="tech-name">React</span>
+                    </div>
+                    <div class="decoration-item decoration-2">
+                        <span class="tech-icon">🟢</span>
+                        <span class="tech-name">Node.js</span>
+                    </div>
+                    <div class="decoration-item decoration-3">
+                        <span class="tech-icon">🍃</span>
+                        <span class="tech-name">MongoDB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-text">Scroll to explore</div>
+        <div class="scroll-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+            </svg>
+        </div>
+    </div>
+</section>
+
+<section class="articles">
+    <div class="articles-header">
+        <h2 class="articles__heading">
+            <span class="heading-icon">📚</span>
+            Latest Posts
+            <span class="heading-accent"></span>
+        </h2>
+        <p class="articles-description">Discover the latest insights, tutorials, and stories from my journey in web development</p>
+    </div>
+    
+    <div class="articles-grid">
+        <% data.forEach((post, index) => { %>
+            <article class="article-card fade-in article-card-<%= index %>">
+                <div class="article-card-header">
+                    <div class="article-meta">
+                        <span class="article-date">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                            </svg>
+                            <%= post.createdAt.toDateString() %>
+                        </span>
+                        <span class="article-category">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+                            </svg>
+                            Article
+                        </span>
+                    </div>
+                    <div class="article-status">
+                        <div class="status-indicator"></div>
+                        <span>Published</span>
+                    </div>
+                </div>
+                
+                <div class="article-content">
+                    <h3 class="article-title">
+                        <a href="/post/<%= post._id %>"><%= post.title %></a>
+                    </h3>
+                    <p class="article-excerpt">
+                        <%= post.body ? post.body.substring(0, 120) + '...' : 'Click to read this amazing article and discover new insights!' %>
+                    </p>
+                </div>
+                
+                <div class="article-footer">
+                    <div class="article-stats">
+                        <span class="reading-time">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            ~<%= Math.max(1, Math.ceil((post.body ? post.body.split(' ').length : 100) / 200)) %> min read
+                        </span>
+                        <span class="article-engagement">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                            <span class="like-count"><%= Math.floor((post._id.toString().charCodeAt(0) % 45) + 5) %></span>
+                        </span>
+                    </div>
+                    <a href="/post/<%= post._id %>" class="read-more-btn">
+                        <span>Read More</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                        </svg>
+                    </a>
+                </div>
+            </article>
+        <% }) %>
+    </div>
+
+    <% if (nextPage !== null) { %>
+        <div class="pagination-container">
+            <a href="/?page=<%= nextPage %>" class="pagination-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+                <span>View Older Posts</span>
+                <div class="btn-shimmer"></div>
+            </a>
+        </div>
+    <% } %>
+</section>

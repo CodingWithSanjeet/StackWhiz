@@ -1,0 +1,55 @@
+<header class="header">
+  <a href="/" class="header__logo">
+    <div class="logo-container">
+      <svg class="logo-icon" width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Stack layers representing technology stack -->
+        <rect x="15" y="70" width="70" height="8" rx="4" fill="#FF6B6B"/>
+        <rect x="20" y="55" width="60" height="8" rx="4" fill="#4ECDC4"/>
+        <rect x="25" y="40" width="50" height="8" rx="4" fill="#45B7D1"/>
+        <rect x="30" y="25" width="40" height="8" rx="4" fill="#96CEB4"/>
+        
+        <!-- Lightning bolt for "whiz" -->
+        <path d="M55 10 L45 35 L55 35 L45 60 L65 30 L55 30 L65 10 Z" fill="#FFD93D" stroke="#FFA726" stroke-width="1"/>
+        
+        <!-- Dots for connectivity -->
+        <circle cx="15" cy="20" r="3" fill="#FF6B6B"/>
+        <circle cx="85" cy="25" r="3" fill="#4ECDC4"/>
+        <circle cx="10" cy="45" r="3" fill="#45B7D1"/>
+        <circle cx="90" cy="50" r="3" fill="#96CEB4"/>
+      </svg>
+      <span class="logo-text">
+        <span class="logo-stack">Stack</span><span class="logo-whiz">Whiz</span><span class="logo-dev">.dev</span>
+      </span>
+    </div>
+  </a>
+  <nav class="header__nav">
+    <ul>
+      <li>
+        <a href="/" class="<%= isActiveRoute('/', currentRoute) %>">Home</a>
+      </li>
+      <li>
+        <a href="/about" class="<%= isActiveRoute('/about', currentRoute) %>">About</a>
+      </li>
+      <li>
+        <a href="/contact" class="<%= isActiveRoute('/contact',currentRoute) %>">Contact</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="header__button">
+    <button class="searchBtn" aria-expanded="false">
+      Search
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="17"
+        height="17"
+        viewBox="0 0 48 48"
+        >
+        <path
+            fill="currentColor"
+            d="M21 3C11.6 3 4 10.6 4 20s7.6 17 17 17c3.3546 0 6.471 0.9802 9.1035 2.6523L42.3789 46.6211 46.6211 42.3789 34.5234 30.2793C36.6957 27.424 38 23.8706 38 20c0-9.4-7.6-17-17-17zm0 4c7.2 0 13 5.8 13 13s-5.8 13-13 13-13-5.8-13-13 5.8-13 13-13z"
+        />
+    </svg>
+
+    </button>
+  </div>
+</header>

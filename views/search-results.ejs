@@ -1,0 +1,153 @@
+<div class="search-results-container fade-in">
+  <!-- Enhanced Search Header -->
+  <div class="search-results-header">
+    <h1 class="author__heading">🔍 Search Results</h1>
+    <% if (locals.searchTerm) { %>
+      <p class="search-description">
+        Showing results for: <span class="search-query"><%= searchTerm %></span>
+      </p>
+      <div class="search-count">
+        <% if (locals.data && data.length > 0) { %>
+          <span class="results-found">✨ Found <%= data.length %> amazing result<%= data.length === 1 ? '' : 's' %></span>
+        <% } else { %>
+          <span class="no-results-text">😔 No results found</span>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+
+  <% if (locals.data && data.length > 0) { %>
+    <!-- Enhanced Results Section -->
+    <section class="articles enhanced-results">
+      <div class="results-header">
+        <h2 class="articles__heading">📚 Your Search Results</h2>
+      </div>
+
+      <ul class="enhanced-article-list">
+        <% data.forEach((post, index) => { %>
+          <li class="search-result-card search-result-<%= index %>">
+            <a href="/post/<%= post._id %>" class="enhanced-article-link">
+              <div class="article-content">
+                <div class="article-header">
+                  <h3 class="article-title">
+                    <% if (locals.searchTerm) { %>
+                      <%- post.title.replace(new RegExp(searchTerm, 'gi'), '<mark class="search-highlight">$&</mark>') %>
+                    <% } else { %>
+                      <%= post.title %>
+                    <% } %>
+                  </h3>
+                  <div class="article-meta">
+                    <span class="article-date">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                      </svg>
+                      <%= post.createdAt.toDateString() %>
+                    </span>
+                    <span class="article-category">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+                      </svg>
+                      <%= post.category || 'Article' %>
+                    </span>
+                  </div>
+                </div>
+                
+                <% if (post.excerpt || post.body) { %>
+                  <p class="article-excerpt">
+                    <% 
+                      const excerpt = post.excerpt || post.body.substring(0, 150) + '...';
+                      if (locals.searchTerm) {
+                    %>
+                      <%- excerpt.replace(new RegExp(searchTerm, 'gi'), '<mark class="search-highlight">$&</mark>') %>
+                    <% } else { %>
+                      <%= excerpt %>
+                    <% } %>
+                  </p>
+                <% } %>
+                
+                <div class="article-footer">
+                  <span class="read-more">
+                    Read Article 
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                    </svg>
+                  </span>
+                                     <div class="article-stats">
+                     <span class="reading-time">📖 ~<%- Math.ceil((post.body || '').split(' ').length / 200) %> min read</span>
+                   </div>
+                </div>
+              </div>
+            </a>
+          </li>
+        <% }) %>
+      </ul>
+
+      <!-- Enhanced Pagination -->
+      <% if (locals.pagination && pagination.totalPages > 1) { %>
+        <div class="search-pagination enhanced-pagination">
+          <% if (pagination.currentPage > 1) { %>
+            <a href="/search?q=<%= encodeURIComponent(searchTerm) %>&page=<%= pagination.currentPage - 1 %>" class="pagination prev-page">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+              </svg>
+              Previous
+            </a>
+          <% } %>
+          
+          <div class="page-info">
+            Page <%= pagination.currentPage %> of <%= pagination.totalPages %>
+          </div>
+          
+          <% if (pagination.currentPage < pagination.totalPages) { %>
+            <a href="/search?q=<%= encodeURIComponent(searchTerm) %>&page=<%= pagination.currentPage + 1 %>" class="pagination next-page">
+              Next
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+              </svg>
+            </a>
+          <% } %>
+        </div>
+      <% } %>
+    </section>
+
+  <% } else if (locals.searchTerm) { %>
+    <!-- Enhanced No Results -->
+    <div class="no-results enhanced-no-results">
+      <div class="no-results-icon">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="currentColor" opacity="0.3">
+          <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        </svg>
+      </div>
+      <h2>🤔 Nothing Found</h2>
+      <p>Sorry, we couldn't find any articles matching "<strong class="search-term-highlight"><%= searchTerm %></strong>".</p>
+      <p class="suggestion-text">Try searching with different keywords or explore our popular topics below!</p>
+      
+      <!-- Popular Topics -->
+      <div class="search-suggestions">
+        <h3>🔥 Popular Topics</h3>
+        <div class="topic-tags">
+          <a href="/search?q=javascript" class="topic-tag">JavaScript</a>
+          <a href="/search?q=nodejs" class="topic-tag">Node.js</a>
+          <a href="/search?q=react" class="topic-tag">React</a>
+          <a href="/search?q=css" class="topic-tag">CSS</a>
+          <a href="/search?q=mongodb" class="topic-tag">MongoDB</a>
+          <a href="/search?q=express" class="topic-tag">Express.js</a>
+          <a href="/search?q=web-development" class="topic-tag">Web Dev</a>
+          <a href="/search?q=tutorials" class="topic-tag">Tutorials</a>
+        </div>
+      </div>
+
+      <div class="back-to-home">
+        <a href="/" class="btn">🏠 Back to Home</a>
+      </div>
+    </div>
+  <% } else { %>
+    <!-- Welcome Search State -->
+    <div class="search-welcome">
+      <div class="welcome-icon">✨</div>
+      <h2>Ready to Explore?</h2>
+      <p>Use the search above to discover amazing content, tutorials, and insights!</p>
+    </div>
+  <% } %>
+</div>
+
